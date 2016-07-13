@@ -1,0 +1,29 @@
+composer require barryvdh/laravel-ide-helper
+composer require doctrine/dbal
+
+Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+php artisan ide-helper:generate
+php artisan ide-helper:meta
+php artisan ide-helper:models -W
+
+
+<tbody>
+            @foreach($users as $user)
+                <tr>
+                <td>{{  $user->id   }}</td>
+                <td>{{  $user->firstname    }}</td>
+                <td>{{  $user->lastname   }}</td>
+                <td>{{  $user->email    }}</td>
+                <td>
+                    <a href="/user/{{$user->id}}" class="btn btn-small btn-success">Show</a>
+                    <a href="/user/{{$user->id}}/edit" class="btn btn-small btn-warning">Edit</a>
+                    {!! Form::open(array('url' => 'user/'.$user->id, 'class'=>'pull-right')) !!}
+                    {!! Form::hidden('_method', 'delete') !!}
+                    {!! Form::submit('Delete', array('class' => 'btn btn-small btn-danger')) !!}
+                    {!! Form::close() !!}
+
+                </td>
+                </tr>
+            @endforeach
+        </tbody>
