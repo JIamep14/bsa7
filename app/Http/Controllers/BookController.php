@@ -100,7 +100,7 @@ class BookController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()) {
-            return Redirect::to('book/create')->withErrors($validator)->withInput();
+            return Redirect::to('book/'.$id.'/edit')->withErrors($validator)->withInput();
         } else {
             $book = Book::find($id);
             //$book->title = $request->title;
