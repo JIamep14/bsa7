@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.user', ['users' => User::paginate(10)]);
+        return view('user.user', ['users' => User::orderBy('lastname', 'ASC')->paginate(10)]);
     }
 
     /**
