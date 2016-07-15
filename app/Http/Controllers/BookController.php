@@ -44,9 +44,9 @@ class BookController extends Controller
     {
         $rules = [
             'title' => ['required'],
-            'author' => ['required', 'regex:/^[a-zA-Z]+$/'],
+            'author' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
             'year' => ['required', 'regex: /^[0-9]+$/'],
-            'genre' => ['required', 'regex:/^[a-zA-Z]+$/']
+            'genre' => ['required', 'regex:/^[a-zA-Z\s]+$/']
         ];
 
         $validator = Validator::make($request->all(), $rules);
