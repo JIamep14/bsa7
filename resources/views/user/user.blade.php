@@ -23,7 +23,9 @@
                 <td>{{  $user->email    }}</td>
                 <td>
                 @foreach($user->books as $book)
-                        <a href="/book/{{ $book->id }}" class="btn btn-primary btn-xs">{{$book->title}}</a><br>
+                        <a href="/book/{{ $book->id }}" class="btn btn-primary btn-xs">{{$book->title}}</a>
+                        <br>
+
                 @endforeach</td>
                 <td>
                     <a href="/user/{{$user->id}}" class="btn btn-small btn-success">Show</a>

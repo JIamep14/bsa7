@@ -39,7 +39,8 @@ Route::post('user/{id}/givebook', function($id, Request $request) {
 
 Route::post('book/{id}/return', function($id){
     $book = Book::find($id);
+    $user_id = $book->user->id;
     $book->user_id = 0;
     $book->save();
-    return Redirect::to('user');
+    return Redirect::to('user/'.$user_id);
 });

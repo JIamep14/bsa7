@@ -22,7 +22,10 @@
                 <td>{{  $book->author   }}</td>
                 <td>{{  $book->year    }}</td>
                 <td>{{  $book->genre    }}</td>
-                <td>@if(!is_null($book->user)) {{$book->user->firstname.' '.$book->user->lastname}}<br><a href="/book/{{$book->id}}" class="btn btn-primary btn-xs">Return</a>  @endif</td>
+                <td>@if(count($book->user))
+                        <a href="/user/{{$book->user->id}}" class="btn btn-primary btn-xs">{{$book->user->firstname.' '.$book->user->lastname}}</a>
+                        <br>
+                        <a href="/book/{{$book->id}}" class="btn btn-primary btn-xs">Return</a>  @endif</td>
                 <td>
                     <a href="/book/{{$book->id}}" class="btn btn-small btn-success">Show </a>
                     <a href="/book/{{$book->id}}/edit" class="btn btn-small btn-warning">Edit</a>
