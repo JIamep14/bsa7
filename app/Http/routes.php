@@ -44,3 +44,7 @@ Route::post('book/{id}/return', function($id){
     $book->save();
     return Redirect::to('user/'.$user_id);
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
