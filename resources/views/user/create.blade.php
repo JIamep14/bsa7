@@ -26,6 +26,11 @@
         {!! Form::label('', 'Email') !!}
         {!! Form::text('email', Form::old('email'), array('class' => 'form-control')) !!}
     </div>
+
+    <div class="form-group">
+        {!! Form::label('', 'Password') !!}
+        {!! Form::text('password', Form::old('password'), array('class' => 'form-control')) !!}
+    </div>
     {!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
     {!! Form::close() !!}
 @stop

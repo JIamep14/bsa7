@@ -55,7 +55,8 @@ class UserController extends Controller
         $rules = array(
             'firstname'=> array('required', 'min:3', 'regex:/^[a-zA-Z]+$/'),
             'lastname' => array('required','min:3','Regex:/^[a-zA-Z]+$/'),
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5'
         );
 //                'required|regex:[A-Za-z]',
         $validator = Validator::make($request->all(), $rules, $this->messages);
@@ -63,11 +64,18 @@ class UserController extends Controller
             return Redirect::to('user/create')->withErrors($validator)->withInput();
         } else {
 
-            $user = new User($request->all());
+            //$user = new User($request->all());
+            //$user->password = bcrypt($request->password);
             //$user->firstname = $request->firstname;
             //$user->lastname = $request->lastname;
             //$user->email = $request->email;
-            $user->save();
+            //$user->save();
+            User::create([
+                'password' => bcrypt($request->password),
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+            ]);
 
             Session::flash('message', 'Succesfully added user');
             return Redirect::to('user');
@@ -82,7 +90,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if(Auth::user()->id != $id && Auth::user()->is_admin == 0) return Redirect::to('/');
+        if(Auth::user()->id != $id && !Auth::user()->isAdmin()) return Redirect::to('/');
         $user = User::find($id);
 
         return view('user.show', ['user' => $user]);
@@ -96,7 +104,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->id != $id && Auth::user()->is_admin == 0) return Redirect::to('/');
+        if(Auth::user()->id != $id && !Auth::user()->isAdmin()) return Redirect::to('/');
         $user = User::find($id);
 
         return view('user.edit', ['user' => $user]);

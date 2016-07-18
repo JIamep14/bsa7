@@ -17,7 +17,7 @@ class RoleMiddleWare
      */
     public function handle($request, Closure $next)
     {
-        if($request ->user()->is_admin == 0) {
+        if(!$request ->user()->isAdmin()) {
             return back();
         }
 

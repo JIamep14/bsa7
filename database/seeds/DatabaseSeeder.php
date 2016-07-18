@@ -35,7 +35,7 @@ class UsersSeeder extends Seeder {
             User::create([
                 'firstname' => $names[array_rand($names)],
                 'lastname' => $surnames[array_rand($surnames)],
-                'email' => 'example'. $i .'@mail.com',
+                'email' => 'example'. $i .'@gmail.com',
                 'password' => bcrypt('example'. $i)
             ]);
         }

@@ -34,7 +34,7 @@
                     {{  $book->title .' - '. $book->author .' - '. $book->genre .' - '. $book->year  }}
                 </td>
                 <td>
-                    <a href="/book/{{$book->id}}" class="btn btn-small btn-success">Return</a>
+                    @if(Auth::user()->isAdmin())<a href="/book/{{$book->id}}" class="btn btn-small btn-success">Return</a>@endif
                 </td>
             </tr>
         @endforeach

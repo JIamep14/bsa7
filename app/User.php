@@ -29,23 +29,27 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email'
+        'firstname', 'lastname', 'email', 'password',
     ];
 
 
     protected $table = 'users';
-    protected $guarded = 'id';
+    protected $guarded = ['id'];
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token'
     ];
 
     public function books() {
         return $this->hasMany(Book::class, 'user_id');
+    }
+
+    public function isAdmin() {
+        return $this->is_admin === 1 ? true : false;
     }
     
 }

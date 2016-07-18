@@ -17,6 +17,7 @@ use App\Book;
 
 
 Route::resource('user', 'UserController');
+
 Route::group (['middleware' => ['auth', 'role']], function () {
 
     Route::resource('book', 'BookController');
@@ -67,3 +68,6 @@ $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
 $this->post('password/reset', 'Auth\PasswordController@reset');
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('auth/google', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/google/callback', 'Auth\AuthController@handleProviderCallback');
