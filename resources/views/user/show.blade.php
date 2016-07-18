@@ -21,6 +21,7 @@
         {!! Form::text('email', $user->email, array('class' => 'form-control', 'readonly')) !!}
     </div>
     {!! Form::close() !!}
+    <a href="{{ Auth::user()->id }}/edit" class="btn btn-primary">Edit</a><br><br>
     <table class="table table-striped table-hover table-bordered">
         <thead>
         <td>Book info</td>

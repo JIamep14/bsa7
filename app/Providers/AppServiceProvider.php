@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         User::deleting(function($user){
             return $user->books()->update(['user_id'=>0]);
         });
+
+//        DB::listen(function ($query) {var_dump($query->sql);});
     }
 
     /**

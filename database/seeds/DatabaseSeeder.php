@@ -24,11 +24,19 @@ class UsersSeeder extends Seeder {
         $names = ['Aaron', 'Alfred', 'Adam', 'Brian', 'Carter', 'Corwin', 'Harley', 'Howard', 'Isaac', 'Ramsey', 'Roswell'];
         $surnames = ['ATKINS', 'AUSTIN', 'AVERY', 'BAGLEY', 'BURTON', 'CHASE', 'CLARK', 'DAVIDSON', 'DWIGHT', 'ELDER']; //'',
         DB::table('users')->delete();
+        User::create([
+            'firstname' => 'admin',
+            'lastname' => 'admin',
+            'email' => 'admin@a.c',
+            'is_admin' => 1,
+            'password' => bcrypt('admin')
+        ]);
         for($i = 1; $i < 50;$i++) {
             User::create([
                 'firstname' => $names[array_rand($names)],
                 'lastname' => $surnames[array_rand($surnames)],
-                'email' => 'example'. $i .'@mail.com'
+                'email' => 'example'. $i .'@mail.com',
+                'password' => bcrypt('example'. $i)
             ]);
         }
     }

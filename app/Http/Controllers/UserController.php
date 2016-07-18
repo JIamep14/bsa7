@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Http\Requests;
 use App\User;
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role', ['except' => ['edit', 'show', 'update']]);
+    }
 
     private $messages = [
         'firstname.regex' => 'The firstname must contain only letters',
@@ -75,6 +82,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        if(Auth::user()->id != $id && Auth::user()->is_admin == 0) return Redirect::to('/');
         $user = User::find($id);
 
         return view('user.show', ['user' => $user]);
@@ -88,6 +96,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->id != $id && Auth::user()->is_admin == 0) return Redirect::to('/');
         $user = User::find($id);
 
         return view('user.edit', ['user' => $user]);
@@ -121,7 +130,7 @@ class UserController extends Controller
             $user->update($request->all());
 
             Session::flash('message', 'Succesfully updated user');
-            return Redirect::to('user');
+            return Redirect::to('user/'.$id);
         }
     }
 
