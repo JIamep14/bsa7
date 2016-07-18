@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'laravelsmtp1@gmail.com', 'name' => 'Password reset'],
 
     /*
     |--------------------------------------------------------------------------

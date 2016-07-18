@@ -51,23 +51,7 @@ Route::group (['middleware' => ['auth', 'role']], function () {
 
 Route::get('/', function () { return view('freebooks', ['books' => Book::orderBy('title', 'ASC')->paginate(20)]);});
 
-//Route::auth();
-
-// Authentication Routes...
-$this->get('login', 'Auth\AuthController@showLoginForm');
-$this->post('login', 'Auth\AuthController@login');
-$this->get('logout', 'Auth\AuthController@logout');
-
-// Registration Routes...
-$this->get('register', 'Auth\AuthController@showRegistrationForm');
-$this->post('register', 'Auth\AuthController@register');
-
-// Password Reset Routes...
-$this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-$this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-$this->post('password/reset', 'Auth\PasswordController@reset');
-
-Route::get('/home', 'HomeController@index');
+Route::auth();
 
 Route::get('auth/google', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\AuthController@handleProviderCallback');

@@ -52,7 +52,7 @@ class BooksSeeder extends Seeder
         for($i = 0;$i < 100;$i ++)
         {
             Book::create([
-                'title'=>'Title '. $i,
+                'title'=>'zTitle '. $i,
                 'author' => $authors[array_rand($authors)],
                 'genre' => $genres[array_rand($genres)],
                 'year' => rand(1600, 2016)
